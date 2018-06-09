@@ -2,3 +2,5 @@
 .htmlhintrc
 .stylelintrc
 .eslintrc.json
+.test.js
+.CONTRIBUTING.MD
