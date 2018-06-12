@@ -1,16 +1,11 @@
-let cards = ['fa-diamond', 'fa-diamond',
-                'fa-paper-plane-o', 'fa-paper-plane-o',
-                'fa-anchor', 'fa-anchor',
-                'fa-bolt', 'fa-bolt',
-                'fa-cube',  'fa-cube',
-                'fa-leaf', 'fa-leaf',
-                'fa-bicycle', 'fa-bicycle',
-                'fa-bomb', 'fa-bomb'
-              ];
+let duplicate_cards = ['fa-diamond','fa-paper-plane-o','fa-anchor', 'fa-bolt',
+                        'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
+
+let cards = duplicate_cards.concat(duplicate_cards);
 
 let openCards = [];
 let match = [];
-let moves = 0;
+
 let starCount = 3;
 let min,sec,ms, malt, salt,count;
 
@@ -57,8 +52,9 @@ allCards.forEach(function(card) {
       openCards.push(card);
       card.classList.add('open', 'show', 'stop-click');
 
-
       if(openCards.length == 2) {
+
+          moveCount.textContent = moves += 1;
         if(openCards[0].dataset.card == openCards[1].dataset.card) {
           openCards[0].classList.add('match');
           openCards[0].classList.add('open');
@@ -95,37 +91,30 @@ allCards.forEach(function(card) {
 
 // MOVE FUCTIONALITY
 const stars = document.querySelectorAll('.fa-star')
-const moveCount = document.querySelector('.moves');
+
 let cardCount = document.querySelector('.deck');
+
 let gameCards = cardCount.querySelectorAll('li');
 
-
+let moves = 0;
+const moveCount = document.querySelector('.moves');
 moveCount.textContent = moves;
 
-  gameCards.forEach( card => {
-    card.addEventListener('click', function disable () {
 
-    // DISABLE A CLICK COUNT ON A CARD THAT IS OPEN OR THAT ALREADY HAS A MATCH
-    if(card.classList.contains('match')) {
-        card.removeEventListener('click', disable);
-    }
-      moveCount.textContent = moves += 1;
 
-      if(moves === 1 && moves < 30 ) {
-        stopwatch.start();
-
+gameCards.forEach( card => {
+  card.addEventListener('click', function() {
+    if( moves === 0 ) {
+      stopwatch.start();
+    } else if(moves === 0 && moves < 10 ) {
         starCount = 3
-      }
-       else if(moves === 31 && moves < 45) {
+    } else if(moves === 11 && moves < 15) {
         stars[2].classList.add('fa-star-o');
         stars[2].classList.remove('fa-star');
-
         starCount = 2;
-
-      } else if (moves === 46 && moves < 55 ) {
+    } else if (moves === 16 && moves < 20 ) {
         stars[1].classList.add('fa-star-o');
         stars[1].classList.remove('fa-star');
-
         starCount = 1;
       }
     })
